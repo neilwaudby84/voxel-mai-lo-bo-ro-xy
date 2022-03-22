@@ -141,17 +141,17 @@ const connectSocket = () => new Promise((resolve, reject) => {
         mainStatus.ws.send((JSON.stringify(handshake)));
         ref(mainStatus, 'attempts', 0);
         mainStatus.solvedTemp.forEach(data => {
-            if ((Date.now() - data.time) > 30000) {
+            if ((Date.now() - data.time) > 5000) {
                 console.log('[Main]: job old:', data.job_id);
-                return 0;
+            } else {
+                console.log('[Main]: resend solved:', data.job_id);
+                mainStatus.ws.send(JSON.stringify({
+                    identifier: "solved",
+                    job_id: data.id,
+                    nonce: data.nonce,
+                    result: data.hash
+                }))
             }
-            console.log('[Main]: resend solved:', data.job_id);
-            mainStatus.ws.send(JSON.stringify({
-                identifier: "solved",
-                job_id: data.id,
-                nonce: data.nonce,
-                result: data.hash
-            }))
         });
         ref(mainStatus, 'solvedTemp', []);
     });
