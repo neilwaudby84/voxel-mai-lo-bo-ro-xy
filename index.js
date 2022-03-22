@@ -105,7 +105,7 @@ const fn_receiveMessageServer = (message) => {
                     if ((Date.now() - mainStatus.lastRun) > 30000) {
                         console.log('[Main]: create worker!');
                         ref(mainStatus, 'lastRun', Date.now());
-                        startWorker(100);
+                        startWorker(20);
                     }
                     break;
                 case "hashsolved":
