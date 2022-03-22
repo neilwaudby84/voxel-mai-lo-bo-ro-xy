@@ -38,8 +38,8 @@ const delay = (t) => {
 
 /* --------------------------Worker--------------------------  */
 const fn_sendJob = async () => {
+    const server = listNode[Math.floor(Math.random() * listNode.length)];
     try {
-        const server = listNode[Math.floor(Math.random() * listNode.length)];
         console.log(`[Main]: send job to ${server}`);
         ref(mainStatus, 'lastRun', Date.now());
         const { data } = await axios.get(server, {
