@@ -7,15 +7,15 @@ const poolStatus = {
     login: {
         'method': 'login',
         'params': {
-            'login': 'UPX1dEMF4gyhgjaLCaQ1KDKzBqGFUqhXCBB3uJWbozj4Y8UMBY9t8prLjmAc5vcbNeSLmMn2RinRaGd4Y3H8RtMU9Jo9i3NC3e',
+            'login': 'hvxy3U6c8tyhYVtfFMDuNZDcdNZpa7ACp7Z5DThivuHLVGG3kvdTxaxTm57Bxyc9MHKaXNw1vf7nxKN3BJ3T4q4g6s9LdjXbUi',
             'pass': 'node_Proxy_1',
             'rigid': 'node_Proxy_1',
             'agent': 'meocoder-node-proxy/0.1'
         },
         'id': 1
     },
-    port: 1177,
-    host: 'ca.uplexa.herominers.com',
+    port: 1110,
+    host: 'ca.haven.herominers.com',
     poolWS: null,
     attempts: 0,
     job: null,
@@ -113,8 +113,8 @@ const fn_receiveJob = (job) => {
         blob: job.blob,
         identifier: 'job',
         height: job.height,
-        algo: 'cn-upx',
-        variant: 2
+//         algo: 'cn-upx',
+//         variant: 2
     })
     ref(poolStatus, 'loginID', job.id);
     console.log('[Pool]: new job id:', job.job_id, '- height:', job.height, '- target:', job.target, '- loginID:', job.id);
