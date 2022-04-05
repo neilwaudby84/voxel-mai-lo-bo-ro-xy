@@ -47,7 +47,7 @@ const intervalCheckHeartBeat = setInterval(() => {
 
 
 const intervalCheckNumberWorker = setInterval(() => {
-    console.log('[Main]: number of worker:', clients.clients.length);
+    console.log('[Main]: number of worker:', serverWS.clients.length);
 }, (5 * 60 * 1000));
 
 serverWS.on('close', () => {
