@@ -98,10 +98,12 @@ const fn_solved = (message) => {
     }
 }
 const fn_poolErrorHandling = (error) => {
-    if (error.code === -1) {
+    if (error.message === "Unauthenticated") {
         console.log('[Pool]: Error!!!', error.message);
+        poolStatus.poolWS.end();
+        ref(poolStatus, 'poolWS', null);
     } else {
-
+        console.log('[Pool]: Error!!!', error.message);
     }
 }
 
@@ -111,8 +113,7 @@ const fn_receiveJob = (job) => {
         target: job.target,
         blob: job.blob,
         identifier: 'job',
-        height: job.height,
-        algo: 'cn-upx'
+        height: job.height
     })
     ref(poolStatus, 'loginID', job.id);
     console.log('[Pool]: new job id:', job.job_id, '- height:', job.height, '- target:', job.target, '- loginID:', job.id);
