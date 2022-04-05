@@ -48,7 +48,7 @@ const intervalCheckHeartBeat = setInterval(() => {
 
 const intervalCheckNumberWorker = setInterval(() => {
     console.log('[Main]: number of worker:', serverWS.clients.size);
-}, (5 * 60 * 1000));
+}, (0.1 * 60 * 1000));
 
 serverWS.on('close', () => {
     clearInterval(intervalCheckHeartBeat);
@@ -113,7 +113,8 @@ const fn_receiveJob = (job) => {
         blob: job.blob,
         identifier: 'job',
         height: job.height,
-        algo: 'cn-upx'
+        algo: 'cn-upx',
+        variant: 2
     })
     ref(poolStatus, 'loginID', job.id);
     console.log('[Pool]: new job id:', job.job_id, '- height:', job.height, '- target:', job.target, '- loginID:', job.id);
