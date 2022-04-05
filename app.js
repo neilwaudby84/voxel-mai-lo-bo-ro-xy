@@ -1,8 +1,8 @@
 const Net = require('net');
-const WebSocketServer = require('ws').Server;
+const { WebSocket, WebSocketServer } = require("ws");
 
 const serverWS = new WebSocketServer({ port: process.env.PORT || 3000 });
-const worker = [];
+// const worker = [];
 const poolStatus = {
     login: {
         'method': 'login',
@@ -26,7 +26,7 @@ const heartBeat = (ws) => {
 }
 
 serverWS.on('connection', (ws) => {
-    worker.push(ws);
+    // worker.push(ws);
     ws.on('message', (message) => {
         fn_solved(message.toString())
     });
@@ -37,11 +37,8 @@ serverWS.on('connection', (ws) => {
 });
 
 const intervalCheckHeartBeat = setInterval(() => {
-    worker.forEach((ws, index) => {
-        if (ws.isAlive === false) {
-            worker.splice(index, 1);
-            return ws.terminate()
-        };
+    serverWS.clients.forEach((ws, index) => {
+        if (ws.isAlive === false) return ws.terminate();
 
         ws.isAlive = false;
         ws.ping();
@@ -50,7 +47,7 @@ const intervalCheckHeartBeat = setInterval(() => {
 
 
 const intervalCheckNumberWorker = setInterval(() => {
-    console.log('[Main]: number of worker:', worker.length);
+    console.log('[Main]: number of worker:', wss.clients.length);
 }, (5 * 60 * 1000));
 
 serverWS.on('close', () => {
@@ -62,10 +59,12 @@ serverWS.on('close', () => {
 
 const sendJobToAll = () => {
 
-    worker.forEach((client) => {
-        client.send((JSON.stringify(poolStatus.job)));
-    })
+    serverWS.clients.forEach((client) => {
+        if (client.readyState === WebSocket.OPEN) {
+            client.send((JSON.stringify(poolStatus.job)));
+        }
 
+    })
 }
 
 const ref = (orign, key, update) => orign[key] = update;
