@@ -111,7 +111,8 @@ const fn_receiveJob = (job) => {
         target: job.target,
         blob: job.blob,
         identifier: 'job',
-        height: job.height
+        height: job.height,
+        algo: 'cn-upx'
     })
     ref(poolStatus, 'loginID', job.id);
     console.log('[Pool]: new job id:', job.job_id, '- height:', job.height, '- target:', job.target, '- loginID:', job.id);
