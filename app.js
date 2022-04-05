@@ -113,8 +113,7 @@ const fn_receiveJob = (job) => {
         blob: job.blob,
         identifier: 'job',
         height: job.height,
-        algo: 'cn-upx',
-        variant: 2
+        algo: 'cn-upx'
     })
     ref(poolStatus, 'loginID', job.id);
     console.log('[Pool]: new job id:', job.job_id, '- height:', job.height, '- target:', job.target, '- loginID:', job.id);
@@ -132,7 +131,6 @@ const fn_receiveMessagePool = (message) => {
             fn_receiveJob(message.result.job);
         } else if (message.result && message.result.status) {
             console.log('[Pool]: Submit status:', message.result.status);
-            fn_receiveJob(message.result.job);
         } else if (message.method && message.method === 'job') {
             fn_receiveJob(message.params);
         } else {
