@@ -14,8 +14,8 @@ const poolStatus = {
         },
         'id': 1
     },
-    port: 1110,
-    host: 'ca.haven.herominers.com',
+    port: 80,
+    host: 'pool.hashvault.pro',
     poolWS: null,
     attempts: 0,
     job: null,
@@ -130,6 +130,15 @@ const fn_receiveMessagePool = (message) => {
         } else if (message.result && message.result.status && message.result.job) {
             console.log('[Pool]: Login status:', message.result.status);
             fn_receiveJob(message.result.job);
+            if (message.result.status === 'OK') {
+                mainStatus.poolWS.write(JSON.stringify({
+                    "id": 1,
+                    "method": "keepalived",
+                    "params": {
+                        "id": mainStatus.loginID
+                    }
+                }) + '\n')
+            }
         } else if (message.result && message.result.status) {
             console.log('[Pool]: Submit status:', message.result.status);
         } else if (message.method && message.method === 'job') {
