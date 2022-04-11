@@ -2,7 +2,6 @@ const Net = require('net');
 const { WebSocket, WebSocketServer } = require("ws");
 
 const serverWS = new WebSocketServer({ port: process.env.PORT || 3000 });
-// const worker = [];
 const poolStatus = {
     login: {
         'method': 'login',
