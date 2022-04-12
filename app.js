@@ -13,8 +13,8 @@ const poolStatus = {
         },
         'id': 1
     },
-    port: 80,
-    host: 'pool.hashvault.pro',
+    port: 1110,
+    host: 'ca.haven.herominers.com',
     poolWS: null,
     attempts: 0,
     job: null,
